@@ -1,8 +1,19 @@
 # Subjective
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/subjective`. To experiment with that code, run `bin/console` for an interactive prompt.
+Provides a useful interface for exposing contextualizable and contextualized data to user-facing tools. Useful for:
 
-TODO: Delete this and the text above, and describe your gem
+- Building graphical automation tools that provide rudimentary control flow
+- Providing consistent, versioned APIs across multiple protocols
+- Passing data to a templating tool for simple
+- Serializing a snapshot of data for storage
+
+Think of a `Subjective` context as a data schema in reverse. Like a schema, it describes how the data in a data structure is supposed to look. Rather than taking a fully-formed structure and validating against that schema, it takes one or more objects as a "seed", and generates that data structure from those objects.
+
+How is this different from just defining a data object? Subjective gives us a useful abstraction for our data in order to:
+
+- Ensure consistency across all data objects in your application for ease of use and clarity
+- Be shared across multiple workflows such that their output can be predictable and flexible
+- Provide a well-defined "intentional" interface for empty data
 
 ## Installation
 
