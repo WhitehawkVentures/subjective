@@ -2,6 +2,7 @@
 /.bundle
 
 .env
+.ruby-version
 
 # Logs and temps.
 /log/*

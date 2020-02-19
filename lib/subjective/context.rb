@@ -7,8 +7,6 @@ module Subjective
   # Base class and DSL for a context container.
   #
   class Context
-    extend Subjective::Attributable
-
     attr_reader :params
 
     def initialize(params = {})
