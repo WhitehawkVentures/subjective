@@ -6,5 +6,17 @@ require "subjective"
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
 
+Subjective.use :dry_struct
+
+module Types
+  include Dry::Types.module
+end
+
+class FooContext < Subjective::Context
+  define_schema do
+    attribute :name, Types::String
+  end
+end
+
 require "pry"
 Pry.start
