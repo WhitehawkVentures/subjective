@@ -22,6 +22,7 @@ class FooContext < Subjective::Context
 
   define_validations do
     validates :name, presence: true
+    validates :color, presence: true
   end
 end
 

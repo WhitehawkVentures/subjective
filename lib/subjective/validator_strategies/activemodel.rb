@@ -30,6 +30,10 @@ module Subjective
         validation_instance(core).errors.full_messages
       end
 
+      def validators_for(attribute_name)
+        validation_model.validators_on(attribute_name)
+      end
+
       private
 
       def validation_instance(core)

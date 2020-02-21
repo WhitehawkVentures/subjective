@@ -9,6 +9,8 @@ module Subjective
   module Validatable
     extend Concernable
 
+    attribute_spec_feature(:validators) { |attribute| schema_template.validators_for(attribute) }
+
     # Macros for validations
     module ClassMethods
       def define_validations(&dsl)
