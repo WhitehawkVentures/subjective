@@ -16,7 +16,7 @@ module Subjective
       end
 
       def validation_template
-        @validation_template ||= validator_strategy.new
+        @validation_template ||= validator_strategy.new(self)
       end
 
       private
@@ -24,6 +24,24 @@ module Subjective
       def validator_strategy
         Subjective.validator_strategy
       end
+    end
+
+    def valid?
+      _validation_template.valid?(_struct_core)
+    end
+
+    def validation_errors
+      _validation_template.validation_errors(core)
+    end
+
+    def validation_error_messages
+      _validation_template.validation_error_messages(core)
+    end
+
+    private
+
+    def _validation_template
+      self.class.validation_template
     end
   end
 end

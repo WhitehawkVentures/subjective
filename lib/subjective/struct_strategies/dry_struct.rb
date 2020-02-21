@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'subjective/struct_strategy'
+
 module Subjective
   module StructStrategies
     ##

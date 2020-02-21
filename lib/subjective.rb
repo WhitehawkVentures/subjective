@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 require 'subjective/version'
-
-require 'subjective/struct_strategy'
 require 'subjective/context'
 
 ##
@@ -15,7 +13,8 @@ module Subjective
   }.freeze
 
   VALIDATOR_STRATEGIES = {
-    dry_validation: 'StructStrategies::DryValidation'
+    dry_validation: 'ValidatorStrategies::DryValidation',
+    activemodel: 'ValidatorStrategies::ActiveModel'
   }.freeze
 
   class << self

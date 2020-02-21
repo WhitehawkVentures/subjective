@@ -7,6 +7,7 @@ require "subjective"
 # with your gem easier. You can also use a different console, if you like.
 
 Subjective.use :dry_struct
+Subjective.validate_with :activemodel
 
 module Types
   include Dry::Types.module
@@ -17,6 +18,10 @@ class FooContext < Subjective::Context
     attribute :name, Types::String
     attribute :color, Types::String.default('red')
     attribute :time, Types::Time.default { Time.now }
+  end
+
+  define_validations do
+    validates :name, presence: true
   end
 end
 
