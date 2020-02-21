@@ -10,7 +10,12 @@ require 'subjective/context'
 #
 module Subjective
   STRUCT_STRATEGIES = {
+    testing: 'StructStrategies::Testing',
     dry_struct: 'StructStrategies::DryStruct'
+  }.freeze
+
+  VALIDATOR_STRATEGIES = {
+    dry_validation: 'StructStrategies::DryValidation'
   }.freeze
 
   class << self
@@ -35,6 +40,8 @@ module Subjective
     end
 
     def find_validator_strategy(strategy)
+      require "subjective/validator_strategies/#{strategy}"
+
       VALIDATOR_STRATEGIES[strategy.to_sym]
     end
   end
