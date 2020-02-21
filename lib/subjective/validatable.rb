@@ -31,11 +31,11 @@ module Subjective
     end
 
     def validation_errors
-      _validation_template.validation_errors(core)
+      _validation_template.validation_errors(_struct_core)
     end
 
     def validation_error_messages
-      _validation_template.validation_error_messages(core)
+      _validation_template.validation_error_messages(_struct_core)
     end
 
     private

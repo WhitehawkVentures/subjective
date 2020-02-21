@@ -1,3 +1,5 @@
+require 'subjective/struct_strategy'
+
 RSpec.shared_examples Subjective::StructStrategy do
   before(:context) do
     described_class.setup!

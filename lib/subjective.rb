@@ -13,6 +13,7 @@ module Subjective
   }.freeze
 
   VALIDATOR_STRATEGIES = {
+    testing: 'ValidatorStrategies::Testing',
     dry_validation: 'ValidatorStrategies::DryValidation',
     activemodel: 'ValidatorStrategies::ActiveModel'
   }.freeze
