@@ -42,7 +42,7 @@ module Subjective
     def find_validator_strategy(strategy)
       require "subjective/validator_strategies/#{strategy}"
 
-      VALIDATOR_STRATEGIES[strategy.to_sym]
+      const_get VALIDATOR_STRATEGIES[strategy.to_sym]
     end
   end
 end
