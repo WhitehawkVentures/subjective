@@ -19,6 +19,10 @@ module Subjective
       end
 
       def materialize_with(**seed_data)
+        seed = seeds.find(seed_data.keys)
+        raise SeedNotFoundError, "Could not find a seed for keys #{seed_data.keys.inspect}" unless seed
+
+        seed.materialize_from(seed_data)
       end
 
       def seeds
