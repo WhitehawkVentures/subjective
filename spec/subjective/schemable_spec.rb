@@ -40,15 +40,18 @@ RSpec.describe Subjective::Schemable do
   end
 
   describe 'attribute assignment' do
-    it 'returns the value assigned to a given attribute' do
-      instance = base.new(name: 'Bob')
+    let(:instance) { base.new(name: 'Bob') }
 
+    before do
+      allow(base.schema_template).to receive(:attribute?).with(:name).and_return(true)
+      allow(base.schema_template).to receive(:attribute?).with(:color).and_return(false)
+    end
+
+    it 'returns the value assigned to a given attribute' do
       expect(instance.name).to eq('Bob')
     end
 
     it 'throws if we try to access a nonexistant attribute' do
-      instance = base.new(name: 'Carl')
-
       expect { instance.color }.to raise_error(NoMethodError)
     end
   end
