@@ -11,6 +11,12 @@ RSpec.shared_examples Subjective::StructStrategy do
     end
   end
 
+  describe '#default_attributes' do
+    it 'is a hash-like object' do
+      expect(described_class.new.default_attributes).to respond_to(:[]).with(1).argument
+    end
+  end
+
   describe '#create_core' do
     it 'returns an object that responds to #attribute?' do
       expect(described_class.new.create_core).to respond_to(:attribute?).with(1).argument

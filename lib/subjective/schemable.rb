@@ -41,6 +41,12 @@ module Subjective
 
     # Macros for schema-related capabilities
     module ClassMethods
+      def call(attributes = default_attributes)
+        return attributes if attributes.is_a?(self)
+
+        new(attributes)
+      end
+
       # Configure the schema template for the provided "struct strategy."
       def define_schema(&dsl)
         schema_template.define(dsl)
@@ -61,6 +67,10 @@ module Subjective
       end
 
       private
+
+      def default_attributes
+        schema_template.default_attributes
+      end
 
       def struct_strategy
         Subjective.struct_strategy

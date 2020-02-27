@@ -117,5 +117,42 @@ RSpec.describe Subjective::Context do
 
       expect(Subjective.available_seeds_for([widget]).first.context_klass).to eq(Thing)
     end
+
+    it 'can be used as a dry-struct hash_schema and be initialized from an instance' do
+      stub_const('Widget', Class.new(Subjective::Context) do
+        define_schema do
+          attribute :name, Types::String
+        end
+      end)
+
+      stub_const('Gadget', Class.new(Subjective::Context) do
+        define_schema do
+          attribute :widget, Widget
+        end
+      end)
+
+      widget = Widget.new(name: 'Eyyyyy')
+      gadget = Gadget.new(widget: widget)
+
+      expect(gadget.widget.name).to eq('Eyyyyy')
+    end
+
+    it 'can be used as a dry-struct hash_schema and be initialized from a hash' do
+      stub_const('Widget', Class.new(Subjective::Context) do
+        define_schema do
+          attribute :name, Types::String
+        end
+      end)
+
+      stub_const('Gadget', Class.new(Subjective::Context) do
+        define_schema do
+          attribute :widget, Widget
+        end
+      end)
+
+      gadget = Gadget.new(widget: { name: 'Sup' })
+
+      expect(gadget.widget.name).to eq('Sup')
+    end
   end
 end

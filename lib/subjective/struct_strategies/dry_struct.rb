@@ -18,6 +18,10 @@ module Subjective
         dsl_target.class_eval(&dsl_block)
       end
 
+      def default_attributes
+        dsl_target.send(:default_attributes)
+      end
+
       def create_core(attributes = {})
         CoreWrapper.new(dsl_target, attributes)
       end

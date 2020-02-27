@@ -17,6 +17,10 @@ module Subjective
         dsl_block.()
       end
 
+      def default_attributes
+        {}
+      end
+
       def create_core(attributes = {})
         CoreWrapper.new(attributes)
       end
