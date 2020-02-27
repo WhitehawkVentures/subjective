@@ -77,6 +77,12 @@ module Subjective
       end
     end
 
+    def to_h
+      _struct_core.to_h
+    end
+
+    alias to_hash to_h
+
     def method_missing(method_name, *args)
       attribute?(method_name) ? _struct_core.read_attribute(method_name, *args) : super
     end

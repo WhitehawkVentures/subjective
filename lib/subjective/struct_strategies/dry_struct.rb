@@ -61,6 +61,10 @@ module Subjective
           @attribute_assignments = attribute_assignments
         end
 
+        def to_h
+          instance.to_h
+        end
+
         def attribute?(attribute_name)
           core_klass.has_attribute?(attribute_name)
         end

@@ -26,5 +26,12 @@ class FooContext < Subjective::Context
   end
 end
 
+class BarContext < Subjective::Context
+  define_schema do
+    attribute :foo, FooContext
+    attribute :age, Types::Integer
+  end
+end
+
 require "pry"
 Pry.start

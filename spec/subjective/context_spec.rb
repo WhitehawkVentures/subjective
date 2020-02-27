@@ -154,5 +154,33 @@ RSpec.describe Subjective::Context do
 
       expect(gadget.widget.name).to eq('Sup')
     end
+
+    it 'can be converted to a hash' do
+      stub_const('Widget', Class.new(Subjective::Context) do
+        define_schema do
+          attribute :name, Types::String
+        end
+      end)
+
+      expect(Widget.new(name: 'Some widget').to_h[:name]).to eq('Some widget')
+    end
+
+    it 'can be converted to a hash with nested attributes' do
+      stub_const('Widget', Class.new(Subjective::Context) do
+        define_schema do
+          attribute :name, Types::String
+        end
+      end)
+
+      stub_const('Gadget', Class.new(Subjective::Context) do
+        define_schema do
+          attribute :widget, Widget
+        end
+      end)
+
+      gadget = Gadget.new(widget: { name: 'Hello' })
+
+      expect(gadget.to_h[:widget][:name]).to eq('Hello')
+    end
   end
 end
