@@ -31,6 +31,10 @@ module Subjective
       validator_strategy.setup!
     end
 
+    def available_seeds_for(objects)
+      Subjective::Seedable.seed_type_index.find_seeds_for_objects(objects)
+    end
+
     private
 
     def find_struct_strategy(strategy)

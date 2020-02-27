@@ -5,11 +5,11 @@ require 'subjective/materializer'
 module Subjective
   # @private
   class Seed
-    attr_reader :names, :materializer
+    attr_reader :template, :materializer
 
-    def initialize(names, context_klass, &config)
-      @names = process_hash(names)
-      @materializer = new_materializer(@names.keys, context_klass, config)
+    def initialize(template, context_klass, &config)
+      @template = process_hash(template)
+      @materializer = new_materializer(@template.keys, context_klass, config)
     end
 
     def materialize_from(data)
@@ -24,7 +24,15 @@ module Subjective
     end
 
     def keys
-      names.keys
+      template.keys
+    end
+
+    def types
+      template.values
+    end
+
+    def context_klass
+      materializer._context_klass
     end
 
     private

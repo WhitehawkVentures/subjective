@@ -3,6 +3,7 @@
 require 'subjective/concernable'
 require 'subjective/seed'
 require 'subjective/seed_collection'
+require 'subjective/seed_type_index'
 
 module Subjective
   ##
@@ -54,8 +55,17 @@ module Subjective
   module Seedable
     extend Concernable
 
+    class << self
+      # A global collection of seeds, indexed by the types that their templates map to.
+      def seed_type_index
+        @seed_type_index ||= SeedTypeIndex.new
+      end
+    end
+
     # Macros for seeding
     module ClassMethods
+      attr_writer :seeds
+
       # Create a new seed with a template and a config block. The keys passed in as the template will become methods
       # accessible from the blocks passed in to the materialization DSL. The DSL works like this: each attribute (i.e.,
       # each value for which the including class's +attribute?+ method will return false) is defined as a method. Each

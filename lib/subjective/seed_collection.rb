@@ -2,12 +2,19 @@
 
 require 'set'
 
+require 'subjective/seed_name_index'
+
 module Subjective
   class SeedNotFoundError < StandardError; end
 
   # @private
   class SeedCollection
     include Enumerable
+
+    def initialize(name_index: SeedNameIndex.new, type_index: Subjective::Seedable.seed_type_index)
+      @name_index = name_index
+      @type_index = type_index
+    end
 
     def each
       return enum_for(:each) unless block_given?
@@ -20,28 +27,27 @@ module Subjective
     end
 
     def <<(seed)
-      verify_new_seed! seed
+      verify_new_seed!(seed)
 
-      name_map[name_map_key(seed.keys)] = seed
+      indexes.each { |index| index.add_seed(seed) }
+
       seeds << seed
     end
 
     def find(keys)
-      name_map[name_map_key(keys)]
+      name_index.find_seed_for_names(keys)
     end
 
     private
 
+    attr_reader :name_index, :type_index
+
+    def indexes
+      [name_index, type_index]
+    end
+
     def seeds
       @seeds ||= Set.new
-    end
-
-    def name_map
-      @name_map ||= {}
-    end
-
-    def name_map_key(keys)
-      keys.map(&:to_s).sort.join('//').to_sym
     end
 
     def verify_new_seed!(seed)

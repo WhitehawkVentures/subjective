@@ -23,6 +23,10 @@ RSpec.describe Subjective::Seedable do
         self.class.attributes.each { |attribute| instance_variable_set("@#{attribute}", params[attribute]) }
       end
     end
+
+    klass.seeds = Subjective::SeedCollection.new(type_index: Subjective::SeedTypeIndex.new)
+
+    klass
   end
 
   let(:order_klass) { Struct.new(:product_name, :quantity, :unit_price) }
