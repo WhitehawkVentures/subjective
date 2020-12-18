@@ -22,7 +22,7 @@ module Subjective
 
     def use(strategy)
       self.struct_strategy = find_struct_strategy(strategy)
-      struct_strategy.setup!
+      struct_strategy.setup!(Context)
     end
 
     def validate_with(strategy)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'subjective/struct_strategies/dry_struct'
 
@@ -9,7 +11,7 @@ RSpec.describe Subjective::StructStrategies::DryStruct do
   end
 
   before(:example) do
-    stub_const('Types', Module.new { include Dry::Types.module })
+    stub_const('Types', Module.new { include Dry.Types() })
   end
 
   describe '#define' do

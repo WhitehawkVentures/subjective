@@ -9,8 +9,14 @@ module Subjective
     #
     class DryStruct < StructStrategy
       class << self
-        def setup!
+        def setup!(base_context_klass = ::Subjective::Context)
           require 'dry-struct'
+
+          base_context_klass.instance_eval do
+            def type
+              Dry.Types().Constructor(self)
+            end
+          end
         end
       end
 
@@ -51,7 +57,7 @@ module Subjective
       end
 
       def schema_info(attribute_name)
-        dsl_target.schema[attribute_name.to_sym]
+        dsl_target.schema.key(attribute_name.to_sym)
       end
 
       # @private

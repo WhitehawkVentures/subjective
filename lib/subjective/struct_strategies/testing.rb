@@ -9,7 +9,7 @@ module Subjective
     #
     class Testing < StructStrategy
       class << self
-        def setup!
+        def setup!(_base_context_klass)
         end
       end
 

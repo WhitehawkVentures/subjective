@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 # These are integration specs for Subjective contexts, using various strategies
@@ -12,7 +14,7 @@ RSpec.describe Subjective::Context do
       Subjective.validate_with :activemodel
 
       stub_const('Types', Module.new do
-        include Dry::Types.module
+        include Dry.Types()
       end)
     end
 
@@ -127,7 +129,7 @@ RSpec.describe Subjective::Context do
 
       stub_const('Gadget', Class.new(Subjective::Context) do
         define_schema do
-          attribute :widget, Widget
+          attribute :widget, Widget.type
         end
       end)
 
@@ -146,7 +148,7 @@ RSpec.describe Subjective::Context do
 
       stub_const('Gadget', Class.new(Subjective::Context) do
         define_schema do
-          attribute :widget, Widget
+          attribute :widget, Widget.type
         end
       end)
 
@@ -174,7 +176,7 @@ RSpec.describe Subjective::Context do
 
       stub_const('Gadget', Class.new(Subjective::Context) do
         define_schema do
-          attribute :widget, Widget
+          attribute :widget, Widget.type
         end
       end)
 
